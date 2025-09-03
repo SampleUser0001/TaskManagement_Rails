@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @taskmanager %>
+
+<div>
+  <%= link_to "Edit this taskmanager", edit_taskmanager_path(@taskmanager) %> |
+  <%= link_to "Back to taskmanagers", taskmanagers_path %>
+
+  <%= button_to "Destroy this taskmanager", @taskmanager, method: :delete %>
+</div>

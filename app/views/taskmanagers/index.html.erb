@@ -1,0 +1,21 @@
+<div id="app" class="content theme-dark"><section class="section"><div class="container">
+<% if notice %>
+  <div class="notification is-success"><%= notice %></div>
+<% end %>
+
+<% content_for :title, "Taskmanagers" %>
+
+<h1 class="title is-2">Taskmanagers</h1>
+
+<div id="taskmanagers">
+  <% @taskmanagers.each do |taskmanager| %>
+    <%= render taskmanager %>
+    <p>
+      <%= link_to "Show this taskmanager", taskmanager %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New taskmanager", new_taskmanager_path, class: "button is-primary" %>
+
+</div></section></div>

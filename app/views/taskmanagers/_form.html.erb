@@ -1,0 +1,32 @@
+<%= form_with(model: taskmanager) do |form| %>
+  <% if taskmanager.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(taskmanager.errors.count, "error") %> prohibited this taskmanager from being saved:</h2>
+
+      <ul>
+        <% taskmanager.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :memo, style: "display: block" %>
+    <%= form.text_field :memo %>
+  </div>
+
+  <div>
+    <%= form.label :status, style: "display: block" %>
+    <%= form.number_field :status %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

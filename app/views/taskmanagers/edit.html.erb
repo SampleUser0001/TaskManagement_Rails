@@ -1,0 +1,12 @@
+<% content_for :title, "Editing taskmanager" %>
+
+<h1>Editing taskmanager</h1>
+
+<%= render "form", taskmanager: @taskmanager %>
+
+<br>
+
+<div>
+  <%= link_to "Show this taskmanager", @taskmanager %> |
+  <%= link_to "Back to taskmanagers", taskmanagers_path %>
+</div>
