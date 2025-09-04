@@ -6,6 +6,9 @@
 
 <h1 class="title is-2">Taskmanagers</h1>
 
+<!-- 新規作成 -->
+<%= render "new", taskmanager: @taskmanager %>
+
 <div id="taskmanagers">
   <% @taskmanagers.each do |taskmanager| %>
     <%= render taskmanager %>

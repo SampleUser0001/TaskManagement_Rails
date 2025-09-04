@@ -1,0 +1,27 @@
+
+<%= form_with(model: taskmanager) do |form| %>
+<div id="new_taskmanager" class="box">
+
+<h2>登録</h2>
+
+  <div>
+    <%= form.text_field :title , class: "input", placeholder: "タスクを入力" %>
+  </div>
+
+  <div>
+    <%= form.submit "登録", class: "button is-info is-outlined is-fullwidth" %>
+  </div>
+
+  <% if taskmanager.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(taskmanager.errors.count, "error") %> prohibited this taskmanager from being saved:</h2>
+
+      <ul>
+        <% taskmanager.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>
+<% end %>

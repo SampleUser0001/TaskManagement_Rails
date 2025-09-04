@@ -4,6 +4,7 @@ class TaskmanagersController < ApplicationController
   # GET /taskmanagers or /taskmanagers.json
   def index
     @taskmanagers = Taskmanager.all
+    @taskmanager = Taskmanager.new
   end
 
   # GET /taskmanagers/1 or /taskmanagers/1.json
@@ -25,8 +26,11 @@ class TaskmanagersController < ApplicationController
 
     respond_to do |format|
       if @taskmanager.save
-        format.html { redirect_to @taskmanager, notice: "Taskmanager was successfully created." }
-        format.json { render :show, status: :created, location: @taskmanager }
+        # taskmanagers_pathでindexにリダイレクトする
+        format.html { redirect_to taskmanagers_path, notice: "タスク登録しました。(" + @taskmanager.title + ")" }
+
+        @taskmanagers = Taskmanager.all
+        format.json { render :index, status: :created }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @taskmanager.errors, status: :unprocessable_entity }
@@ -38,8 +42,9 @@ class TaskmanagersController < ApplicationController
   def update
     respond_to do |format|
       if @taskmanager.update(taskmanager_params)
-        format.html { redirect_to @taskmanager, notice: "Taskmanager was successfully updated.", status: :see_other }
-        format.json { render :show, status: :ok, location: @taskmanager }
+        # indexにリダイレクトする
+        format.html { redirect_to taskmanagers_path, notice: "Taskmanager was successfully updated.", status: :see_other }
+        format.json { render :index, status: :ok, location: @taskmanager }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @taskmanager.errors, status: :unprocessable_entity }
