@@ -22,7 +22,7 @@ class TaskmanagersController < ApplicationController
 
   # POST /taskmanagers or /taskmanagers.json
   def create
-    params[:taskmanager][:status] = Enums::Status::WAITING[:label]
+    params[:taskmanager][:status] = Enums::Status::WAITING[:id]
     @taskmanager = Taskmanager.new(taskmanager_params)
 
     respond_to do |format|
