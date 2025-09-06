@@ -10,4 +10,8 @@ class Taskmanager < ApplicationRecord
   def status_label
     Enums::Status.get_label(self.status_before_type_cast)
   end
+
+  def is_waiting?
+    self.status_before_type_cast == Enums::Status::WAITING[:id]
+  end
 end

@@ -1,5 +1,5 @@
 class TaskmanagersController < ApplicationController
-  before_action :set_taskmanager, only: %i[ show edit update destroy ]
+  before_action :set_taskmanager, only: %i[ show edit update destroy pop ]
 
   # GET /taskmanagers or /taskmanagers.json
   def index
@@ -36,6 +36,23 @@ class TaskmanagersController < ApplicationController
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @taskmanager.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  # 退避一覧を実行中に移す
+  def pop
+    # すでに実行中のタスクがあれば待機にする
+    @running_task = Taskmanager.find_by(status: Enums::Status::RUNNING[:id])
+    if @running_task
+      @running_task.update(status: Enums::Status::WAITING[:id])
+    end
+
+    # 選択されたタスクを実行中にする
+    @taskmanager.update(status: Enums::Status::RUNNING[:id])
+
+    respond_to do |format|
+      format.html { redirect_to taskmanagers_path, notice: "タスクを実行中にしました。(" + @taskmanager.title + ")" }
+      format.json { render :index, status: :ok, location: @taskmanager }
     end
   end
 

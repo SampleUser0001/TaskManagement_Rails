@@ -10,13 +10,19 @@
 <%= render "new", taskmanager: @taskmanager %>
 
 <!-- 退避一覧 -->
-<div id="taskmanagers">
-  <% @taskmanagers.each do |taskmanager| %>
-    <%= render taskmanager %>
-    <p>
-      <%= link_to "Show this taskmanager", taskmanager %>
-    </p>
-  <% end %>
+<div class="box">
+    <h2>退避</h2>
+    <div class="content">
+        <ul>
+            <% @taskmanagers.each do |taskmanager| %>
+                <% if taskmanager.is_waiting? %>
+                    <li id="<%= taskmanager.id %>" style="display: flex; justify-content: space-between; align-items: center;">
+                        <span><%= taskmanager.title %></span>
+                        <%= button_to "", pop_taskmanager_path(taskmanager), method: :patch, class: "delete is-small" %>
+                    </li>
+                <% end %>
+            <% end %>
+        </ul>
+    </div>
 </div>
 
-<%= link_to "New taskmanager", new_taskmanager_path, class: "button is-primary" %>
