@@ -9,6 +9,7 @@
 <!-- 新規作成 -->
 <%= render "new", taskmanager: @taskmanager %>
 
+<!-- 退避一覧 -->
 <div id="taskmanagers">
   <% @taskmanagers.each do |taskmanager| %>
     <%= render taskmanager %>
